@@ -1,12 +1,10 @@
 package com.ijse.aad_75.controller;
 
+import com.ijse.aad_75.dto.DepartmentDTO;
 import com.ijse.aad_75.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -20,8 +18,8 @@ public class DepartmentController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String saveDepartment(){
-        departmentService.saveDepartment();
+    public String saveDepartment(@RequestBody DepartmentDTO departmentDTO){
+        departmentService.saveDepartment(departmentDTO);
         return "Department saved successfully";
     }
 

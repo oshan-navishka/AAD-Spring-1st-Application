@@ -17,11 +17,11 @@ public class DepartmentServiceImpl implements DepartmentService{
         this.departmentRepository = departmentRepository;
     }
 
-    public void saveDepartment(){
+    public void saveDepartment(DepartmentDTO departmentDTO){
         try{
             Department department = new Department();
-            department.setDepartment_Name("IT");
-            department.setDepartment_location("Dhaka");
+            department.setDepartment_Name(departmentDTO.getDepartment_Name());
+            department.setDepartment_location(departmentDTO.getDepartment_location());
 
             departmentRepository.save(department);
         }catch (Exception e){
