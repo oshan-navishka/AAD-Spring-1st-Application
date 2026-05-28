@@ -4,10 +4,7 @@ import com.ijse.aad_75.dto.EmployeeDTO;
 import com.ijse.aad_75.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.util.List;
@@ -26,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String saveEmployee(){
-        employeeService.saveEmployee();
+    public String saveEmployee(@RequestBody EmployeeDTO employeeDTO){
+        employeeService.saveEmployee(employeeDTO);
         return "Employee saved successfully";
     }
 

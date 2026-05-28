@@ -24,12 +24,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void saveEmployee(){
+    public void saveEmployee(EmployeeDTO employeeDTO){
         try{
             Employee employee = new Employee();
-            employee.setFirstName("Oshan");
-            employee.setLastName("Navishka");
-            employee.setAddress("Rathnapura");
+            employee.setFirstName(employeeDTO.getFirstName());
+            employee.setLastName(employeeDTO.getLastName());
+            employee.setAddress(employeeDTO.getAddress());
             employee.setJoinDate(LocalDate.now());
 
             employeeRepository.save(employee);
