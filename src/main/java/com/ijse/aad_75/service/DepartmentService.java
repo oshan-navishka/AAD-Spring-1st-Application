@@ -1,6 +1,7 @@
 package com.ijse.aad_75.service;
 
 import com.ijse.aad_75.dto.DepartmentDTO;
+import com.ijse.aad_75.dto.Request.UpdateDepartmentDTO;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface DepartmentService {
     DepartmentDTO getDepartmentDetails(long departmentId);
 
     void updateDepartment(DepartmentDTO departmentDTO);
+
+    void updateLocation(UpdateDepartmentDTO updateDepartmentDTO);
 }

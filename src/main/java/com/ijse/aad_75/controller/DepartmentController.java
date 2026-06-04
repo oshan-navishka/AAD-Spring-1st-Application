@@ -2,6 +2,7 @@ package com.ijse.aad_75.controller;
 
 import com.ijse.aad_75.constant.CommonResponse;
 import com.ijse.aad_75.dto.DepartmentDTO;
+import com.ijse.aad_75.dto.Request.UpdateDepartmentDTO;
 import com.ijse.aad_75.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -43,6 +44,12 @@ public class DepartmentController {
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResponse updateDepartment(@RequestBody DepartmentDTO departmentDTO){
         departmentService.updateDepartment(departmentDTO);
-        return new CommonResponse(OPERATION_SUCCESS, SUCCESS_MASSAGE);
+        return new CommonResponse(OPERATION_SUCCESS, departmentDTO, SUCCESS_MASSAGE);
+    }
+
+    @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse updateLocation(@RequestBody UpdateDepartmentDTO dto){
+        departmentService.updateLocation(dto);
+        return new CommonResponse(OPERATION_SUCCESS, dto, SUCCESS_MASSAGE);
     }
 }

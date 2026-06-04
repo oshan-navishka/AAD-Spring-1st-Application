@@ -1,6 +1,7 @@
 package com.ijse.aad_75.service.impl;
 
 import com.ijse.aad_75.dto.DepartmentDTO;
+import com.ijse.aad_75.dto.Request.UpdateDepartmentDTO;
 import com.ijse.aad_75.entity.Department;
 import com.ijse.aad_75.repository.DepartmentRepository;
 import com.ijse.aad_75.service.DepartmentService;
@@ -94,6 +95,25 @@ public class DepartmentServiceImpl implements DepartmentService{
             departmentRepository.save(department);
         }catch (Exception e){
             log.error("Error while updating department"+ e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public void updateLocation(UpdateDepartmentDTO updateDepartmentDTO) {
+        log.info("Execute method updateLocation dto{}", updateDepartmentDTO);
+        try{
+            Optional<Department> optionalDepartment = departmentRepository.findById(updateDepartmentDTO.getDepartment_Id());
+
+            if (optionalDepartment.isEmpty())
+                throw new RuntimeException("Sorry, related department is not found");
+
+            Department department = optionalDepartment.get();
+            department.setDepartment_location(updateDepartmentDTO.getDepartment_location());
+
+            departmentRepository.save(department);
+        }catch (Exception e){
+            log.error("Error while updating department location"+ e.getMessage());
             throw e;
         }
     }
