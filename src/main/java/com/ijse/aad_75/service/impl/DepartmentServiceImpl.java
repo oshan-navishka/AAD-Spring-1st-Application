@@ -118,4 +118,22 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
     }
 
+    @Override
+    public List<DepartmentDTO> filterDepartment(String departmentName, String departmentLocation) {
+        log.info("Execute method filterDepartment, departmentName: {}", departmentName);
+        try{
+            List<DepartmentDTO> departmentList = new ArrayList<>();
+            List<Department> departmentsList = departmentRepository.filterDepartments(departmentName, departmentLocation);
+
+            for (Department department : departmentsList) {
+                DepartmentDTO dto = new DepartmentDTO(department.getDepartment_Id(), department.getDepartment_Name(), department.getDepartment_location());
+                departmentList.add(dto);
+            }
+            return departmentList;
+        }catch (Exception e){
+            log.error("Error while filtering department"+ e.getMessage());
+            throw e;
+        }
+    }
+
 }

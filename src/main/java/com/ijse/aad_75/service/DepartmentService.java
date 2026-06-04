@@ -16,4 +16,6 @@ public interface DepartmentService {
     void updateDepartment(DepartmentDTO departmentDTO);
 
     void updateLocation(UpdateDepartmentDTO updateDepartmentDTO);
+
+    List<DepartmentDTO> filterDepartment(String departmentName, String DepartmentLocation);
 }

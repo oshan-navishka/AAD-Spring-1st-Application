@@ -60,7 +60,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping(value = "/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CommonResponse changeEmployeeStatus(@PathVariable long employeeId) {
+    public CommonResponse changeEmployeeStatus(@PathVariable long employeeId) {  // thani data ekak ganna meka @PathVariable use karanawa
         employeeService.changeEmployeeStatus(employeeId);
         return new CommonResponse(OPERATION_SUCCESS, employeeId, SUCCESS_MASSAGE);
     }

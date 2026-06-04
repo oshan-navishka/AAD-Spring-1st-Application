@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.ijse.aad_75.constant.ResponseConde.OPERATION_SUCCESS;
 import static com.ijse.aad_75.constant.ResponseMassage.SUCCESS_MASSAGE;
 
@@ -51,5 +53,12 @@ public class DepartmentController {
     public CommonResponse updateLocation(@RequestBody UpdateDepartmentDTO dto){
         departmentService.updateLocation(dto);
         return new CommonResponse(OPERATION_SUCCESS, dto, SUCCESS_MASSAGE);
+    }
+
+    @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse filterDepartment(
+            @RequestParam(value = "departmentName", required = false) String departmentName, String departmentLocation){
+        List<DepartmentDTO> departmentDTOS = departmentService.filterDepartment(departmentName, departmentLocation);
+        return new CommonResponse(OPERATION_SUCCESS, departmentDTOS, SUCCESS_MASSAGE);
     }
 }
