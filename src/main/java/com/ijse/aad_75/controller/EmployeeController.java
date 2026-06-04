@@ -58,4 +58,10 @@ public class EmployeeController {
         employeeService.updateAddress(dto);
         return new CommonResponse(OPERATION_SUCCESS, dto, SUCCESS_MASSAGE);
     }
+
+    @DeleteMapping(value = "/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse changeEmployeeStatus(@PathVariable long employeeId) {
+        employeeService.changeEmployeeStatus(employeeId);
+        return new CommonResponse(OPERATION_SUCCESS, employeeId, SUCCESS_MASSAGE);
+    }
 }

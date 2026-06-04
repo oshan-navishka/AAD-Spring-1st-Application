@@ -3,6 +3,7 @@ package com.ijse.aad_75.service.impl;
 import com.ijse.aad_75.dto.EmployeeDTO;
 import com.ijse.aad_75.dto.Request.UpdateAddress;
 import com.ijse.aad_75.entity.Employee;
+import com.ijse.aad_75.enumaration.EmployeeStatus;
 import com.ijse.aad_75.repository.EmployeeRepository;
 import com.ijse.aad_75.service.EmployeeService;
 //import lombok.RequiredArgsConstructor;
@@ -128,6 +129,25 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeRepository.save(employee);
         }catch (Exception e){
             log.error("Error while updating employee address"+ e.getMessage());
+        }
+    }
+
+    @Override
+    public void changeEmployeeStatus(long empId) {
+        log.info("Execute method changeEmployeeStatus, empId: {}", empId);
+        try{
+            Optional<Employee> optionalEmployee = employeeRepository.findById(empId);
+
+            if (optionalEmployee.isEmpty())
+                throw new RuntimeException("Sorry, related employee is not found");
+
+            Employee employee = optionalEmployee.get();
+            employee.setEmployeeStatus(EmployeeStatus.INACTIVE);
+
+            employeeRepository.save(employee);
+        }catch (Exception e){
+            log.error("Error while changing employee status"+ e.getMessage());
+            throw e;
         }
     }
 }

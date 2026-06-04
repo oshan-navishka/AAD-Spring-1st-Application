@@ -16,4 +16,6 @@ public interface EmployeeService {
     void updateEmployee(EmployeeDTO employeeDTO);
 
     void updateAddress(UpdateAddress updateAddress);
+
+    void changeEmployeeStatus(long empId);
 }

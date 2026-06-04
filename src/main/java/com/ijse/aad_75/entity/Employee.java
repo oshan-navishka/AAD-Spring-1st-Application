@@ -1,9 +1,7 @@
 package com.ijse.aad_75.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ijse.aad_75.enumaration.EmployeeStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +20,7 @@ public class Employee {
     private String lastName;
     private String address;
     private LocalDate joinDate;
+
+    @Enumerated(EnumType.STRING)
+    private EmployeeStatus employeeStatus;
 }
