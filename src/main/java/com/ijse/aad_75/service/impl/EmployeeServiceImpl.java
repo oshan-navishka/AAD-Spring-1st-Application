@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -24,8 +25,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void saveEmployee(EmployeeDTO employeeDTO){
-        try{
+    public void saveEmployee(EmployeeDTO employeeDTO) {
+        try {
             Employee employee = new Employee();
             employee.setFirstName(employeeDTO.getFirstName());
             employee.setLastName(employeeDTO.getLastName());
@@ -33,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setJoinDate(LocalDate.now());
 
             employeeRepository.save(employee);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("Error while saving employee", e);
         }
     }
@@ -57,9 +58,35 @@ public class EmployeeServiceImpl implements EmployeeService {
                 responseList.add(employeeDTO);
             }
             return responseList;
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("Error while getting all employees", e);
             return null;
+        }
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeDetails(long empId) {
+        log.info("Execute method getEmployeeDetails(), empId: {}", empId);
+
+        try{
+            Optional<Employee> optionalEmployee = employeeRepository.findById(empId);
+
+            if (optionalEmployee.isEmpty())
+                throw new RuntimeException("Sorry, related employee is not found");
+
+            Employee employee = optionalEmployee.get();
+            EmployeeDTO responseData = new EmployeeDTO();
+            responseData.setEmployeeId(employee.getEmployeeId());
+            responseData.setFirstName(employee.getFirstName());
+            responseData.setLastName(employee.getLastName());
+            responseData.setAddress(employee.getAddress());
+            responseData.setJoinDate(employee.getJoinDate());
+
+            return responseData;
+
+        }catch (Exception e){
+            log.error("Error while getting employee details", e.getMessage());
+            throw e;
         }
     }
 }

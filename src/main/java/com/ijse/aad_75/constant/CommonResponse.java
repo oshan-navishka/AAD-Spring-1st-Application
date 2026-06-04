@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class CommonResponse {
     private int status;
-    private Object object;
+    private Object body;
     private String message;
 
     public CommonResponse(int status, String message) {
