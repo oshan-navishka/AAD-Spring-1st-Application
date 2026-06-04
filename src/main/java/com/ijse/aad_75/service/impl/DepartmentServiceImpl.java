@@ -78,4 +78,24 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
     }
 
+    @Override
+    public void updateDepartment(DepartmentDTO departmentDTO) {
+        log.info("Execute method updateDepartment dto{}", departmentDTO);
+        try{
+            Optional<Department> optionalDepartment = departmentRepository.findById(departmentDTO.getDepartment_Id());
+
+            if (optionalDepartment.isEmpty())
+                throw new RuntimeException("Sorry, related department is not found");
+
+            Department department = optionalDepartment.get();
+            department.setDepartment_Name(departmentDTO.getDepartment_Name());
+            department.setDepartment_location(departmentDTO.getDepartment_location());
+
+            departmentRepository.save(department);
+        }catch (Exception e){
+            log.error("Error while updating department"+ e.getMessage());
+            throw e;
+        }
+    }
+
 }

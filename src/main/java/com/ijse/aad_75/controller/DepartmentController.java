@@ -22,15 +22,15 @@ public class DepartmentController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String saveDepartment(@RequestBody DepartmentDTO departmentDTO){
+    public CommonResponse saveDepartment(@RequestBody DepartmentDTO departmentDTO){
         departmentService.saveDepartment(departmentDTO);
-        return "Department saved successfully";
+        return new CommonResponse(OPERATION_SUCCESS, SUCCESS_MASSAGE);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getAllDepartments(){
+    public CommonResponse getAllDepartments(){
         log.info("Execute methode getAllDepartments");
-        return departmentService.getAllDepartments().toString();
+        return new CommonResponse(OPERATION_SUCCESS, departmentService.getAllDepartments(), SUCCESS_MASSAGE);
     }
 
     @GetMapping(value = "/{departmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,5 +38,11 @@ public class DepartmentController {
         DepartmentDTO departmentDetails = departmentService.getDepartmentDetails(departmentId);
 
         return new CommonResponse(OPERATION_SUCCESS, departmentDetails, SUCCESS_MASSAGE);
+    }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse updateDepartment(@RequestBody DepartmentDTO departmentDTO){
+        departmentService.updateDepartment(departmentDTO);
+        return new CommonResponse(OPERATION_SUCCESS, SUCCESS_MASSAGE);
     }
 }
