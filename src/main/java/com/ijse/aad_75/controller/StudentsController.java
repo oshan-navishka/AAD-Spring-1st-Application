@@ -31,4 +31,10 @@ public class StudentsController {
 //        return studentsService.getAllStudents().toString();
         return new CommonResponse(OPERATION_SUCCESS, studentsService.getAllStudents(), SUCCESS_MASSAGE);
     }
+
+    @GetMapping(value = "/{studentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse getStudentDetails(@PathVariable long studentId){
+        StudentsDTO studentDetails = studentsService.getStudentDetails(studentId);
+        return new CommonResponse(OPERATION_SUCCESS, studentDetails, SUCCESS_MASSAGE);
+    }
 }

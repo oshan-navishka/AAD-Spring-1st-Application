@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             employeeRepository.save(employee);
         } catch (Exception e) {
-            log.error("Error while saving employee", e);
+            log.error("Error while saving employee"+ e);
         }
     }
 
@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
             return responseList;
         } catch (Exception e) {
-            log.error("Error while getting all employees", e);
+            log.error("Error while getting all employees"+ e);
             return null;
         }
     }
@@ -85,7 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return responseData;
 
         }catch (Exception e){
-            log.error("Error while getting employee details", e.getMessage());
+            log.error("Error while getting employee details"+ e.getMessage());
             throw e;
         }
     }

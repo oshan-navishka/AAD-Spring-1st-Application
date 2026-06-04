@@ -73,7 +73,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
             return responseData;
         }catch (Exception e){
-            log.error("Error while getting department details", e.getMessage());
+            log.error("Error while getting department details"+ e.getMessage());
             throw e;
         }
     }

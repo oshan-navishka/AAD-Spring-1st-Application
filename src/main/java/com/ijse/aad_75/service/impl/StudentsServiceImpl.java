@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -37,7 +38,7 @@ public class StudentsServiceImpl implements StudentsService {
 
             studentsRepository.save(students);
         }catch (Exception e){
-            log.error("Error while saving Students", e);
+            log.error("Error while saving Students"+ e.getMessage());
         }
     }
 
@@ -60,8 +61,32 @@ public class StudentsServiceImpl implements StudentsService {
             }
             return studentsList;
         }catch (Exception e){
-            log.error("Error while fetching all students", e);
+            log.error("Error while fetching all students"+ e.getMessage());
             return null;
+        }
+    }
+
+    @Override
+    public StudentsDTO getStudentDetails(long studentId) {
+        log.info("Execute method getStudentDetails(), studentId: {}", studentId);
+
+        try{
+            Optional<Students> optionalStudents = studentsRepository.findById(studentId);
+            if (optionalStudents.isEmpty())
+                throw new RuntimeException("Sorry, related student is not found");
+
+            Students students = optionalStudents.get();
+
+            StudentsDTO responseData = new StudentsDTO();
+            responseData.setStudentId(students.getStudentId());
+            responseData.setStudentFirstName(students.getStudentFirstName());
+            responseData.setStudentLastName(students.getStudentLastName());
+            responseData.setStudentContact(students.getStudentContact());
+
+            return responseData;
+        }catch (Exception e){
+            log.error("Error while getting student details" + e.getMessage());
+            throw e;
         }
     }
 }

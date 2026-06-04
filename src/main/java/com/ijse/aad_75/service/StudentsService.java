@@ -9,4 +9,6 @@ public interface StudentsService {
     void saveStudents(StudentsDTO studentsDTO);
 
     List<Students> getAllStudents();
+
+    StudentsDTO getStudentDetails(long studentId);
 }

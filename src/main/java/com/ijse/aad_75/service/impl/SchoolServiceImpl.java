@@ -35,7 +35,7 @@ public class SchoolServiceImpl implements SchoolService {
 
             schoolRepository.save(school);
         }catch (Exception e){
-            log.error("Error while saving Students", e);
+            log.error("Error while saving Students"+ e.getMessage());
         }
     }
 
@@ -57,7 +57,7 @@ public class SchoolServiceImpl implements SchoolService {
             }
             return schoolList;
         }catch (Exception e){
-            log.error("Error while fetching all schools", e);
+            log.error("Error while fetching all schools"+ e.getMessage());
             return null;
         }
     }
