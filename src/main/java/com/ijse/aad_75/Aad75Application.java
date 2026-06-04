@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //@Configuration - mark as a config class
 //@ComponentScan - fina aa our controllers and services automatically
-//@EnableAutoConfiguration - auto configure the application
+//@EnableAutoConfiguration - autoconfigure the application
 @SpringBootApplication
 public class Aad75Application {
 
