@@ -1,9 +1,6 @@
 package com.ijse.aad_75.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +17,6 @@ public class Students {
     private String studentLastName;
     private String studentContact;
 
+    @ManyToOne    // nomal kiwwata one to menny kiyala inna class eka mkkd balala eke idan thama nika dnne dn school ekai sudent ekai gaththama one to menny ne e unata dn me class eka manny ne anna e nisa manny to one dnne
+    private School school;
 }

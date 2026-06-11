@@ -18,4 +18,6 @@ public interface EmployeeService {
     void updateAddress(UpdateAddress updateAddress);
 
     void changeEmployeeStatus(long empId);
+
+    List<EmployeeDTO>filterEmployee(String firstName,String address);
 }

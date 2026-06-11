@@ -2,7 +2,9 @@ package com.ijse.aad_75.service.impl;
 
 import com.ijse.aad_75.dto.EmployeeDTO;
 import com.ijse.aad_75.dto.StudentsDTO;
+import com.ijse.aad_75.entity.School;
 import com.ijse.aad_75.entity.Students;
+import com.ijse.aad_75.repository.SchoolRepository;
 import com.ijse.aad_75.repository.StudentsRepository;
 import com.ijse.aad_75.service.StudentsService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +19,11 @@ import java.util.Optional;
 public class StudentsServiceImpl implements StudentsService {
 
     private final StudentsRepository studentsRepository;
+    private final SchoolRepository schoolRepository;
 
-    public StudentsServiceImpl(StudentsRepository studentsRepository) {
+    public StudentsServiceImpl(StudentsRepository studentsRepository, SchoolRepository schoolRepository) {
         this.studentsRepository = studentsRepository;
+        this.schoolRepository = schoolRepository;
     }
 
     @Override
@@ -36,6 +40,11 @@ public class StudentsServiceImpl implements StudentsService {
             students.setStudentLastName(studentsDTO.getStudentLastName());
             students.setStudentContact(studentsDTO.getStudentContact());
 
+            Optional<School> optionalStudents = schoolRepository.findById(studentsDTO.getSchoolId());
+            if (optionalStudents.isEmpty())
+                throw new RuntimeException("Sorry, related student is already exist");
+            School school = optionalStudents.get();
+            students.setSchool(school);
             studentsRepository.save(students);
         }catch (Exception e){
             log.error("Error while saving Students"+ e.getMessage());

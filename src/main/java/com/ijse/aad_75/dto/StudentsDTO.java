@@ -8,4 +8,6 @@ public class StudentsDTO {
     private String studentFirstName;
     private String studentLastName;
     private String studentContact;
+
+    private long schoolId;
 }

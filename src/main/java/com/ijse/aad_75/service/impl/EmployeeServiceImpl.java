@@ -150,4 +150,25 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw e;
         }
     }
+
+    @Override
+    public List<EmployeeDTO> filterEmployee(String firstName, String address) {
+        log.info("Execute method filterEmployee, firstName: {}, address: {}", firstName, address);
+        try{
+            List<EmployeeDTO> employeeList = new ArrayList<>();
+            List<Employee> employeesList = employeeRepository.filterEmployee(firstName, address);
+
+            for (Employee employee : employeesList) {
+                EmployeeDTO employeeDTO = new EmployeeDTO();
+                employeeDTO.setEmployeeId(employee.getEmployeeId());
+                employeeDTO.setFirstName(employee.getFirstName());
+                employeeDTO.setLastName(employee.getLastName());
+                employeeList.add(employeeDTO);
+            }
+            return employeeList;
+        }catch (Exception e){
+            log.error("Error while filtering employees"+ e.getMessage());
+            throw e;
+        }
+    }
 }

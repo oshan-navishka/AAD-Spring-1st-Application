@@ -64,4 +64,10 @@ public class EmployeeController {
         employeeService.changeEmployeeStatus(employeeId);
         return new CommonResponse(OPERATION_SUCCESS, employeeId, SUCCESS_MASSAGE);
     }
+
+    @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse filterEmployee(String firstName, String address){
+        List<EmployeeDTO> employeeDTOS = employeeService.filterEmployee(firstName, address);
+        return new CommonResponse(OPERATION_SUCCESS, employeeDTOS, SUCCESS_MASSAGE);
+    }
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +24,7 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     private EmployeeStatus employeeStatus;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<EmployeeDepartment> employeeDepartmentList;
 }
