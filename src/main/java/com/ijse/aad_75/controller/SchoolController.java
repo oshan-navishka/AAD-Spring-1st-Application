@@ -1,7 +1,6 @@
 package com.ijse.aad_75.controller;
 
 import com.ijse.aad_75.dto.SchoolDTO;
-import com.ijse.aad_75.dto.StudentsDTO;
 import com.ijse.aad_75.service.SchoolService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +13,7 @@ public class SchoolController {
     public SchoolController(SchoolService schoolService) {
         this.schoolService = schoolService;
     }
+    
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public String saveSchool(@RequestBody SchoolDTO schoolDTO){
         schoolService.saveSchool(schoolDTO);

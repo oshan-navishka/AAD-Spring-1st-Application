@@ -12,5 +12,6 @@ public interface DepartmentRepository extends JpaRepository<Department,Long> {
 
     @Query(value = "SELECT * FROM department WHERE (?1 IS NULL OR department_name LIKE %?1%) AND "
             + "(?2 IS NULL OR department_Location LIKE %?2%)", nativeQuery = true)  // error pennane Like eke depaththe DB eka connect krala nathi nisa eke aulak na
+
     List<Department> filterDepartments(String departmentName, String departmentLocation);
 }
